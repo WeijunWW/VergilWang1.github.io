@@ -2,11 +2,85 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
+	<meta http-equiv="x-ua-compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0">
 	<title>个人网站</title>
-	<link rel="stylesheet" href="css/global.css" type="text/css">
+	<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+	<!--[if lt IE 9]>
+	<script src="./js/html5shiv.js"></script>
+	<script src="./js/respond.js"></script>
+	<![endif]-->
 </head>
 <body>
-	<h3>王维军的个人网站</h3>
-	
+	<div class="container">
+		<div class="col-xs-6 col-xs-offset-3">
+			<h3 class="text-center text-primary">王维军的bootstrap表单</h3>
+			<form action="#" class="form-horizontal text-info">
+				<div class="form-group">
+					<label class="control-label col-xs-4">用户名：</label>
+					<div class="col-xs-8">
+						<input type="text" class="form-control" name="username" placeholder="请输入用户名，如:王维军" required>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-xs-4">密码：</label>
+					<div class="col-xs-8">
+						<input type="password" name="pwd" placeholder="请输入密码" class="form-control">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-xs-4">邮箱：</label>
+					<div class="col-xs-8">
+						<input type="email" name="email" placeholder="email" class="form-control">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-xs-4">爱好：</label>
+					<div class="col-xs-8">
+						<div class="checkbox-inline">
+							<input type="checkbox">游戏
+						</div>
+						<div class="checkbox-inline">
+							<input type="checkbox">电影
+						</div>
+						<div class="checkbox-inline">
+							<input type="checkbox">音乐
+						</div>
+						<div class="checkbox-inline">
+							<input type="checkbox">睡觉
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-xs-4">性别：</label>
+					<div class="col-xs-8">
+						<div class="radio-inline">
+							<input type="radio">男
+						</div>
+						<div class="radio-inline">
+							<input type="radio">女
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-xs-4">爱好：</label>
+					<div class="col-xs-8">
+						<select class="form-control" style="color: #1b6d85;">
+							<option value="1">red</option>
+							<option value="1">green</option>
+							<option value="1">yellow</option>
+						</select>
+					</div>
+				</div>
+				<div class="form-group text-center">
+					<input type="submit" class="btn btn-success">
+					<input type="reset" class="btn btn-danger">
+				</div>
+			</form>
+		</div>
+	</div>
 </body>
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/demo.js"></script>
 </html>
