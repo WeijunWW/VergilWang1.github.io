@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<style type="text/css">
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			body{
+				text-align: center;
+			}
+			div{
+				position: fixed;
+				top: 200px;
+				left: 50%;
+				margin-left: -100px;
+				width: 200px;
+				height: 150px;
+				background: #99D0C8;
+				display: none;
+				text-align: center;
+				border-radius: 10px;
+			}
+			div p{
+				padding: 20px;
+				font-size: 20px;
+				color: #fff;
+				font-weight: bold;
+			}
+			div input{
+				outline: none;
+				border: 0;
+				border-radius: 5px;
+				width: 100px;
+				line-height: 40px;
+				font-size: 18px;
+				font-weight: bold;
+				color: #BE51DE;
+				cursor: pointer;
+			}
+		</style>
+	</head>
+	<body>
+		<canvas id="myCanvas" width="400" height="600"></canvas>
+		<div>
+			<p>你挂了！！点击确定重新开始</p>
+			<input type="button" value="确定"/>
+		</div>
+	</body>
+	<script type="text/javascript">
+		var canvas = document.getElementById('myCanvas');
+		var context = canvas.getContext('2d');
+		var div = document.querySelector("div");
+		var btn = document.querySelector("input");
+		/*
+		  Tips: 1.面向对象:原型和构造函数混合方式创建'类';
+				2.匿名函数的自调用;
+				3.canvas绘制图片方法drawImage()的9个参数;
+				4.new Audio的创建和控制;
+				5.移动端触摸屏幕的事件;
+		*/
+
+		//loading()函数带一个对象参数调用;对象的属性值是图片路径;
+		loading({
+			'bg':'img/background.png',
+			'bullet':'img/bullet2.png',
+			'enemy1':'img/enemy1.png',
+			'enemy2':'img/enemy2.png',
+			'enemy3':'img/enemy3.png',
+			'hero':'img/herofly.png'
+		});
+		/*加载图片的函数loading*/	
+		function loading(ImageArr){
+			var len = 0;
+			var loadingArr = [];
+			for(var i in ImageArr){
+				len++;
+			}
+			var num  = 0;
+			for(var i in ImageArr){
+				var img = new Image();
+				 img.src = ImageArr[i];
+				/*加载图片*/
+				 img.onload = function(index){  
+				 	/*匿名函数的自调用，将i以参数index的形式传递到闭包函数里面*/
+				 		console.log(index);
+				 	  return function(){
+				 	  	 num++;
+				 	  	loadingArr[index] = this;
+				 	  	if(num>=len){ 	//判断所有图片加载完成后调用主函数main();
+				 	  		main(loadingArr);
+				 	  	}
+				 	  }
+				 }(i);
+			}
+		}
+
+		/*创建main(loadingArr)函数,在图片加载完成后被调用*/
+		function main(loadingArr){
+			var bg = loadingArr.bg;
+			canvas.width = bg.width;
+			canvas.height  =bg.height;
+			var moves = 0;
+			var bulletArr = [];
+			var enemyArr = [];
+			//主机
+			function Hero(){
+				this.img = loadingArr.hero; 
+				this.w = this.img.width/5;
+				this.h = this.img.height;
+				this.x = canvas.width/2-this.w/2;
+				this.y = canvas.height-this.img.height;
+				this.speed = 8;
+				this.index = 0;
+				this.num = 0;
+			}
+			Hero.prototype.draw = function(){
+				for(var i = 0;i<enemyArr.length;i++){
+
+					if(this.x<enemyArr[i].x+enemyArr[i].w&&enemyArr[i].x<this.x+this.w&&this.y<enemyArr[i].y+enemyArr[i].h&&enemyArr[i].y<this.y+this.h){
+						if(this.num%8==0){
+							this.index++;
+							if(this.index > 4){
+								clearInterval(timer);
+								div.style.display = "block";
+							}
+						}
+						this.num++
+						var bgSound = new Audio("audio/game_over.mp3");
+							bgSound.play();
+					}
+				}
+				/*画出主机，由hero.index控制当前主机的状态*/
+				context.drawImage(this.img,this.w*this.index,0,this.w,this.h,this.x,this.y,this.w,this.h);
+			}
+			/*new出一个Hero对象实例*/
+			var hero = new Hero();
+
+			//子弹
+			function Bullet(){
+				this.img = loadingArr.bullet;
+				this.w = this.img.width;
+				this.h = this.img.height;
+				this.x = hero.x-(this.w-hero.w)/2;
+				this.y = hero.y-5;	
+				this.speed = 3;
+				this.power = 1; 
+			}
+			Bullet.prototype.draw = function(){
+				/*绘画子弹*/
+				context.drawImage(this.img,this.x,this.y,this.w,this.h);
+			}
+			/*子弹的move（）方法*/
+			Bullet.prototype.move = function(){
+					/*判断子弹和敌机相撞*/
+					for(var i=0;i<enemyArr.length;i++){
+						if(this.y<=enemyArr[i].y+enemyArr[i].h&&this.y+this.h>=enemyArr[i].y&&this.x<=enemyArr[i].x+enemyArr[i].w&&this.x+this.w>=enemyArr[i].x){
+							this.y = -this.h;
+							enemyArr[i].power-=this.power; //减去血量的
+						}
+					}
+				this.y-=this.speed;  //子弹只能往上的一个方向运动;
+			}
+			Bullet.prototype.clear = function(){
+				if(this.y<0){
+					return true;
+				}else{
+					return false;
+				}
+			}
+			/*敌机*/
+			function Enemy(){
+				this.type = 1;		//敌机的类型,通过随机数决定是大还是小飞机;
+				var num  = random(1,10);
+				if(num<4){
+					this.img = loadingArr.enemy1;
+					this.w = this.img.width/5
+					this.h = this.img.height;
+					this.speed = 3;
+					this.power = 1;
+					this.type = 1;
+				}else if(num>=4&&num<8){
+					this.img = loadingArr.enemy2;
+					this.w = this.img.width/6
+					this.h = this.img.height;
+					this.speed = 2;
+					this.power = 2;
+					this.type = 2;
+				}else{
+					this.img = loadingArr.enemy3;
+					this.w = this.img.width/10;
+					this.h = this.img.height;
+					this.speed = 1;
+					this.power = 3;
+					this.type = 3;
+				}
+				this.x = random(0,canvas.width-this.w);
+				this.y = -this.h;
+				this.num = 0;
+				this.index = 0;
+				this.sound = false;
+				this.judge = true;
+			}
+			Enemy.prototype.draw = function(){
+					if(this.power<=0){
+						    this.num++;
+						    this.speed = 0;
+						if(this.num%5==0){
+							this.index++;
+							if(this.judge){
+								if(this.type==1){
+									var bgSound = new Audio("audio/enemy1_down.mp3");
+								    bgSound.play();
+								    this.judge=false;
+								}else if(this.type==2){
+									var bgSound = new Audio("audio/enemy2_down.mp3");
+								    bgSound.play();
+								    this.judge=false;	
+								}else{
+									var bgSound = new Audio("audio/enemy3_down.mp3");
+								    bgSound.play();
+								    this.judge=false;
+								}
+							}
+						}
+						if(this.index>this.img.width/this.w){
+							this.y = myCanvas.height;
+						}
+					}
+					context.drawImage(this.img,this.w*this.index,0,this.w,this.h,this.x,this.y,this.w,this.h);
+			}
+			Enemy.prototype.clear = function(){
+				if(this.y>canvas.height){
+					return true;
+				}else{
+					return false;
+				}	
+			}
+			Enemy.prototype.move = function(){
+				this.y+=this.speed;
+			}
+       		//将所有的绘制方法封装一个函数draw();
+			function draw(){
+				context.clearRect(0,0,canvas.width,canvas.height);
+				context.drawImage(bg,0,moves);
+				context.drawImage(bg,0,moves-bg.height);
+				if(moves>bg.height){
+					moves = 0;
+				}
+				hero.draw();
+				if(moves%20==0){
+					var bullet = new Bullet();
+				    bulletArr.push(bullet);
+				}
+				for(var i = 0;i<bulletArr.length;i++){
+					bulletArr[i].draw();
+				    bulletArr[i].move();
+				    if(moves%20==0){
+				    	 var bgSound = new Audio("audio/bullet.mp3");
+							bgSound.play();
+				    }
+				    if(bulletArr[i].clear()){
+				    	bulletArr.splice(i,1);
+				    }
+				}
+				if(moves%50==0){
+					var enemy = new Enemy();
+				    enemyArr.push(enemy);
+				}
+				var k  = 0;
+				for(var i = 0;i<enemyArr.length;i++){
+					enemyArr[i].draw();
+				    enemyArr[i].move();
+				    if(enemyArr[i].clear()){
+				    	enemyArr.splice(i,1);
+				    } 
+				}
+				moves++
+				// window.requestAnimationFrame(draw);
+				// setTimeout(draw,10);
+			}
+			draw();
+			var timer = setInterval(draw,10);
+			//背景音乐
+			var bgSound = new Audio("audio/game_music.mp3");
+			bgSound.loop = true;
+			bgSound.play();
+			/*监听事件window的键盘事件*/
+			window.addEventListener("keydown",function(event){
+				var keycode = event.keyCode;
+				console.log(keycode)
+				switch(keycode){
+					case 37:  			//右键  	
+							if(hero.x<=0){
+								hero.x
+							}else{
+								hero.x-=hero.speed;
+							}
+						break;
+						
+					case 38:  			//上键
+							hero.y -=hero.speed; 
+					    break;
+					case 39:   			//左键
+					    if(hero.x>canvas.width-hero.w){
+								hero.x = canvas.width-hero.w
+							}else{
+								hero.x+=hero.speed;
+							}
+					    break;
+					case 40:  			//下键
+						if(hero.y>canvas.height-hero.h){
+							hero.y = canvas.height-hero.h;
+						}else{
+							hero.y +=hero.speed; 
+						}
+					    break;
+					default:
+					    break;
+				}	
+			},false)
+			/*
+			  touchstart：当手指触摸屏幕时候触发;
+			  touchmove：当手指在屏幕上滑动的时候连续地触发;
+			  touchend：手指触摸离开后触发;
+			  touchcancel：手指停止滑动屏幕时触发;
+			*/
+			 canvas.addEventListener("touchstart",function(){
+			     if(event.touches.length==1){
+			       var x = event.touches[0].clientX;
+			       var y = event.touches[0].clientY;
+			       var disX = x - hero.x;
+			       var disY = y - hero.y;
+			      canvas.addEventListener("touchmove",function(){
+			        hero.x = event.touches[0].clientX - disX;
+			        hero.y = event.touches[0].clientY - disY;
+			      },false);
+			     }
+			    },false);
+			btn.addEventListener("click",function(){
+			 	window.location.reload();
+			});
+			btn.addEventListener("touchstart",function(){
+			 	window.location.reload();
+			});
+			/*随机函数*/
+			function random(min,max){
+				return parseInt(Math.random()*(max-min)+min);
+			}
+		}	
+	</script>
+</html>
