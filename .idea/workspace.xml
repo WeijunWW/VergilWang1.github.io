@@ -2,17 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a2001027-38ff-4542-8af0-080e71b024d7" name="默认" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/bootstrap/page2include.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/css/index.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/css/page2.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/css/page22.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/js/page2.js" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/js/demo.js" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/global.css" afterPath="$PROJECT_DIR$/css/global.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/page2.html" afterPath="$PROJECT_DIR$/page2.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/template.html" afterPath="$PROJECT_DIR$/template.html" />
     </list>
     <ignored path="page.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -36,9 +26,10 @@
       <file leaf-file-name="page2.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/page2.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="190">
-              <caret line="46" column="29" selection-start-line="46" selection-start-column="29" selection-end-line="46" selection-end-column="29" />
+            <state relative-caret-position="450">
+              <caret line="15" column="30" selection-start-line="15" selection-start-column="30" selection-end-line="15" selection-end-column="30" />
               <folding>
+                <element signature="n#style#0;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#canvas#0;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#iframe#0;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#div#1;n#body#0;n#html#0;n#!!top" expanded="false" />
@@ -296,12 +287,12 @@
       <workItem from="1494567373592" duration="4118000" />
       <workItem from="1494644180466" duration="12125000" />
       <workItem from="1494656928407" duration="4449000" />
-      <workItem from="1494661823417" duration="18807000" />
+      <workItem from="1494661823417" duration="19160000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="46171000" />
+    <option name="totallyTimeSpent" value="46524000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="156" y="51" width="1700" height="993" extended-state="0" />
@@ -365,6 +356,7 @@
         <state relative-caret-position="420">
           <caret line="14" column="6" selection-start-line="14" selection-start-column="6" selection-end-line="14" selection-end-column="6" />
           <folding>
+            <element signature="n#style#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#canvas#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#iframe#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#div#1;n#body#0;n#html#0;n#!!top" expanded="false" />
@@ -422,6 +414,7 @@
         <state relative-caret-position="420">
           <caret line="14" column="6" selection-start-line="14" selection-start-column="6" selection-end-line="14" selection-end-column="6" />
           <folding>
+            <element signature="n#style#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#canvas#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#iframe#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#div#1;n#body#0;n#html#0;n#!!top" expanded="false" />
@@ -479,6 +472,7 @@
         <state relative-caret-position="420">
           <caret line="14" column="6" selection-start-line="14" selection-start-column="6" selection-end-line="14" selection-end-column="6" />
           <folding>
+            <element signature="n#style#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#canvas#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#iframe#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#div#1;n#body#0;n#html#0;n#!!top" expanded="false" />
@@ -770,9 +764,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/page2.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="46" column="29" selection-start-line="46" selection-start-column="29" selection-end-line="46" selection-end-column="29" />
+        <state relative-caret-position="450">
+          <caret line="15" column="30" selection-start-line="15" selection-start-column="30" selection-end-line="15" selection-end-column="30" />
           <folding>
+            <element signature="n#style#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#canvas#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#iframe#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#div#1;n#body#0;n#html#0;n#!!top" expanded="false" />
