@@ -7,6 +7,7 @@
     <title>个人网站</title>
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/global.css" type="text/css">
+    <link rel="stylesheet" href="css/page3.css">
     <!--[if lt IE 9]>
     <script src="./js/html5shiv.js"></script>
     <script src="./js/respond.js"></script>
@@ -18,7 +19,7 @@
     <div class="container">
         <div class="row">
             <div class="navbar-header ">
-                <a href="index.html" class="navbar-brand">王维军的博客</a>
+                <a href="index.html" class="navbar-brand">王维军的个人网站</a>
                 <button class="navbar-toggle" data-toggle="collapse" data-target="#my-con">
                     <i class="icon-bar"></i>
                     <i class="icon-bar"></i>
@@ -27,9 +28,11 @@
             </div>
             <div id="my-con" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
-                    <li class="my-active"><a href="index.html">bootstrap</a></li>
+                    <li><a href="index.html">bootstrap</a></li>
                     <li><a href="page2.html">html5+css3</a></li>
-                    <li><a href="page3.html">js实例</a></li>
+                    <li class="my-active">
+                        <a href="page3.html">js实例</a>
+                    </li>
                     <li><a href="page4.html">jQuery特效</a></li>
                     <li><a href="page5.html">angularJS</a></li>
                     <li><a href="page6.html">PHP+mysql</a></li>
@@ -38,25 +41,16 @@
         </div>
     </div>
 </nav>
-<!--尾部分页-->
-<div class="container">
-    <div class="row">
-        <!--分页-->
-        <ul class="pagination pull-right hidden-xs">
-            <li><a href="index.html">首页</a></li>
-            <li><a href="#"><<</a></li>
-            <li class="active"><a href="index.html">1</a></li>
-            <li><a href="page2.html">2</a></li>
-            <li><a href="page3.html">3</a></li>
-            <li><a href="page4.html">4</a></li>
-            <li><a href="page5.html">5</a></li>
-            <li><a href="page6.html">6</a></li>
-            <li><a href="page6.html">>></a></li>
-            <li><a href="page6.html">尾页</a></li>
-        </ul>
+<!--内容开始-->
+<div id="wrap"></div>
+<!--内容结束-->
+<div class="container navbar-fixed-bottom">
+    <div class="my-bottom pull-right text-center">
+        原生JS实现单个ul的瀑布流
     </div>
 </div>
 </body>
+<script type="text/javascript" src="js/page3.js"></script>
 <script type="text/javascript" src="js/jquery.min.js"></script>
 <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
 </html>
