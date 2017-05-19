@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="app">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="x-ua-compatible" content="IE=edge">
@@ -7,19 +7,20 @@
     <title>个人网站</title>
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/global.css" type="text/css">
-    <link rel="stylesheet" href="css/page55.css"/>
+    <link rel="stylesheet" href="css/page5.css">
     <!--[if lt IE 9]>
     <script src="./js/html5shiv.js"></script>
     <script src="./js/respond.js"></script>
     <![endif]-->
+    <script type="text/javascript" src="js/angular.min.js"></script>
 </head>
-<body>
+<body ng-controller="con">
 <!--头部导航-->
 <nav class="navbar navbar-inverse my-top-navbar navbar-fixed-top">
     <div class="container">
         <div class="row">
             <div class="navbar-header ">
-                <a href="index.html" class="navbar-brand">王维军的博客</a>
+                <a href="index.html" class="navbar-brand">王维军的个人网站</a>
                 <button class="navbar-toggle" data-toggle="collapse" data-target="#my-con">
                     <i class="icon-bar"></i>
                     <i class="icon-bar"></i>
@@ -45,99 +46,75 @@
     <div class="row">
         <div class="col-md-2">
             <div class="list-group">
-                <a href="page5.html" class="list-group-item">用户管理</a>
-                <a href="page55.html" class="list-group-item active">用户搜索</a>
-                <a href="" role="button"  class="list-group-item" data-toggle="modal" data-target="#myModal">添加用户</a>
+                <a href="page5.html" class="list-group-item">内容管理</a>
+                <a href="page55.html" class="list-group-item active">添加内容</a>
             </div>
         </div>
         <div class="col-md-10">
             <div class="page-header">
-                <h2>用户管理</h2>
+                <h1>内容管理</h1>
             </div>
             <ul class="nav nav-tabs">
                 <li>
-                    <a href="page5.html">用户列表</a>
+                    <a href="page5.html">内容管理</a>
                 </li>
-                <li  class="active">
-                    <a href="page55.html">用户搜索</a>
-                </li>
-                <li>
-                    <a href="" role="button" data-toggle="modal" data-target="#myModal">添加用户</a>
+                <li class="active">
+                    <a href="page55.html">添加内容</a>
                 </li>
             </ul>
-            <form action="#" class="uesr_search">
-                <div class="alert alert-info" role="alert">
-                    <strong>技巧提示：</strong>
-                    支持模糊搜索和匹配搜索，匹配搜索使用*代替！
+            <div class="media" ng-repeat="con in content">
+                <div class="media-left"><img class="img-circle" src={{con.src}} alt=""></div>
+                <div class="media-body">
+                    <div class="media-heading"><b>{{con.title}}</b></div>
+                    <p class="text-muted">{{con.text}}</p>
+                    <p class="small">
+                        <span class="pull-left">发布者：王维军</span>
+                        <span class="pull-right">发布时间：{{nowtime|date:"yyyy-MM-dd hh:mm:ss"}}</span>
+                    </p>
+                </div>
+            </div>
+            <form action="#" class="mar_t15">
+                <div class="form-group">
+                    <label for="title">标题</label>
+                    <input type="text" id="title" ng-model="title" class="form-control" placeholder="请输入文章标题">
                 </div>
                 <div class="form-group">
-                    <label for="name">用户名</label>
-                    <input type="text" id="name" class="form-control" placeholder="请输入用户名">
+                    <label for="content">内容</label>
+                    <textarea id="content" ng-model="text" class="form-control" rows="5" cols="10" placeholder="请输入文章正文部分"></textarea>
                 </div>
                 <div class="form-group">
-                    <label for="uid">UID</label>
-                    <input type="text" id="uid" class="form-control" placeholder="输入用户UID">
+                    <button type="button" ng-click="cli()" class="btn btn-warning pull-right" data-toggle="modal" data-target="#mym">发布文章</button>
+                    <div class="modal fade" id="mym">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    确定要提交吗？
+                                    <span class="close" data-dismiss="modal">x</span>
+                                </div>
+                                <div class="modal-body">
+                                    <p>
+                                        <b>标题：</b>
+                                        {{title}}
+                                    </p>
+                                    <p>
+                                        <b>内容：</b>
+                                        {{text}}
+                                    </p>
+                                    <p>
+                                        <b>发布者：</b>王维军
+                                        <span class="pull-right"><b>发布时间: </b>{{nowtime|date:"yyyy-MM-dd hh:mm:ss"}}</span>
+                                    </p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button class="btn btn-success" ng-click="sub()" data-dismiss="modal">确定</button>
+                                    <button class="btn btn-danger"  data-dismiss="modal" >取消</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="yonghuzu">选择用户组</label>
-                    <select id="yonghuzu" class="form-control">
-                        <option>限制会员</option>
-                        <option>新手上路</option>
-                        <option>组册会员</option>
-                        <option>中级会员</option>
-                        <option>高级会员</option>
-                    </select>
-                </div>
-                <button type="submit" class="btn btn-default">提交</button>
             </form>
-        </div>
-    </div>
-</div>
 
-
-
-<!-- Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">添加用户</h4>
-            </div>
-            <div class="modal-body">
-                <form action="#">
-                    <div class="form-group">
-                        <label for="addname">用户名</label>
-                        <input type="text" id="addname" class="form-control" placeholder="用户名">
-                    </div>
-                    <div class="form-group">
-                        <label for="addpassword">用户密码</label>
-                        <input type="text" id="addpassword" class="form-control" placeholder="请输入用户密码">
-                    </div>
-                    <div class="form-group">
-                        <label for="addpassword1">确认用户密码</label>
-                        <input type="text" id="addpassword1" class="form-control" placeholder="请确认输入用户密码">
-                    </div>
-                    <div class="form-group">
-                        <label for="addemail">请输入用户邮箱</label>
-                        <input type="email" id="addemail" class="form-control" placeholder="请输入用户邮箱">
-                    </div>
-                    <div class="form-group">
-                        <label for="addyonghuzu">所属用户组</label>
-                        <select id="addyonghuzu" class="form-control">
-                            <option>限制会员</option>
-                            <option>新手上路</option>
-                            <option>组册会员</option>
-                            <option>中级会员</option>
-                            <option>高级会员</option>
-                        </select>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button type="button" class="btn btn-primary">提交</button>
-            </div>
         </div>
     </div>
 </div>
@@ -163,4 +140,6 @@
 </body>
 <script type="text/javascript" src="js/jquery.min.js"></script>
 <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/page55.js"></script>
+<script type="text/javascript" src="js/holder.min.js"></script>
 </html>

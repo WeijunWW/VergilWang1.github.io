@@ -1,0 +1,9 @@
+body{
+    color: lightskyblue;
+}
+.my-tr{
+    cursor: pointer;
+}
+.my-show{
+    display: none;
+}
