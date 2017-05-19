@@ -13,16 +13,17 @@ app.controller("con",function($scope){
         }
     ];
     $scope.sub = function () {
-        if($scope.title == ""){
-            var obj = {
-                title:$scope.title,
-                text:$scope.text,
-                src:"img/k0"+(Math.floor(Math.random()*3)+1)+".jpg"
-            };
-            $scope.content.unshift(obj);
-            $scope.title = "";
-            $scope.text = "";
+        if($scope.content.length >= 5){
+            $scope.content.pop();
         }
+        var obj = {
+            title:$scope.title,
+            text:$scope.text,
+            src:"img/k0"+(Math.floor(Math.random()*3)+1)+".jpg"
+        };
+        $scope.content.unshift(obj);
+        $scope.title = "";
+        $scope.text = "";
     };
     $scope.nowtime = new Date().getTime();
     $scope.cli = function(){
