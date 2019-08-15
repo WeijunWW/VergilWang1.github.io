@@ -1,5 +1,5 @@
 module.exports = {
-    base: '/blog/blog',
+    base: '/dist',
     title: 'blog',
     description: 'Vuepress blog',
     themeConfig: {
@@ -7,9 +7,12 @@ module.exports = {
         repo: 'https://github.com/VergilWang1/VergilWang1.github.io',
         // 自定义仓库链接文字。
         repoLabel: 'My GitHub',
-        nav: [
-            { text: 'Home', link: '/' },
-            { text: 'Check', link: '/blog/check.md' }
+        // nav: [
+        //     { text: 'Home', link: '/blog/check.md' }
+        // ],
+        sidebar: [
+            // ['/', '首页'],
+            ['/blog/check.md', '测试']
         ]
     }
 }
